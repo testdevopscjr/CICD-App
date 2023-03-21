@@ -1,0 +1,19 @@
+stages{
+    stage("checkout")
+    {
+        git clone url
+    }
+    stage("CI")
+    {
+        zip -r name-$BUILD_NUMBER.zip *
+        aws s3 cp name-$BUILD_NUMBER.zip s3://bucketname/
+    }
+
+    stage("CD")
+    {
+        
+        aws s3 cp s3://bucketname/name-$BUILD_NUMBER.zip .
+        unzip name-$BUILD_NUMBER.zip
+        scp -r * User@targetserver
+    }
+}

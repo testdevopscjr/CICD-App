@@ -1,19 +1,26 @@
-stages{
-    stage("checkout")
-    {
-        git clone url
-    }
-    stage("CI")
-    {
-        zip -r name-$BUILD_NUMBER.zip *
-        aws s3 cp name-$BUILD_NUMBER.zip s3://bucketname/
-    }
+pipeline {
+    agent any
 
-    stage("CD")
-    {
-        
-        aws s3 cp s3://bucketname/name-$BUILD_NUMBER.zip .
-        unzip name-$BUILD_NUMBER.zip
-        scp -r * User@targetserver
+    stages {
+        stage('checkout') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('CI') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('CD') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('final') {
+            steps {
+                echo 'Hello World'
+            }
+        }
     }
 }
